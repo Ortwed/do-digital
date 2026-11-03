@@ -9,26 +9,26 @@ const { headingLevel = 'h3' } = Astro.props;
 const H = headingLevel;
 ---
 
-<ul class="rule-list cases">
+<ul class="cases">
   {
-    cases.map((c) => (
-      <li class="case">
-        <a href={link(`/cases/${c.slug}/`)} class="visual-link" tabindex="-1" aria-hidden="true">
+    cases.map((c, i) => (
+      <li class:list={['panel', i % 2 ? 'orange' : 'blue-tint']}>
+        <div class="media">
           <CaseVisual item={c} />
-        </a>
-        <div class="text">
-          <H class="name">
-            <a href={link(`/cases/${c.slug}/`)}>{c.client}</a>
-          </H>
-          <p class="muted">{c.teaser}</p>
         </div>
-        <div class="links">
-          <a class="link-arrow" href={link(`/cases/${c.slug}/`)}>
-            Læs casen <span aria-hidden="true">→</span>
-          </a>
-          <a class="link-arrow ext" href={c.url} rel="noopener">
-            {c.domain} <span aria-hidden="true">↗</span>
-          </a>
+        <div class="text">
+          <H class="name">{c.client}</H>
+          <p class="muted">{c.teaser}</p>
+          <div class="links">
+            <a class="link-arrow" href={link(`/cases/${c.slug}/`)}>
+              Læs casen <span class="sr-only">om {c.client}</span>
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="link-arrow" href={c.url} rel="noopener">
+              Se hjemmesiden <span class="sr-only">{c.domain}</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
       </li>
     ))
@@ -36,56 +36,53 @@ const H = headingLevel;
 </ul>
 
 <style>
-  .case {
-    display: grid !important;
-    grid-template-columns: minmax(0, 300px) minmax(0, 1fr) auto;
-    gap: 24px 40px;
+  .cases {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .panel {
+    border-radius: var(--radius-panel);
+    padding: clamp(20px, 4vw, 40px);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+    gap: clamp(24px, 4vw, 48px);
     align-items: center;
-    padding: 32px 0 !important;
   }
-  @media (max-width: 820px) {
-    .case {
-      grid-template-columns: 1fr;
+  .blue-tint {
+    background: var(--tint);
+  }
+  .orange {
+    background: var(--tint-orange);
+  }
+  /* Hvert andet kort har billedet til højre, som i designet */
+  @media (min-width: 900px) {
+    .orange .media {
+      order: 2;
     }
-    .visual-link {
-      max-width: 420px;
-    }
-  }
-  .visual-link {
-    display: block;
-    text-decoration: none;
-    transition: transform 0.2s;
-  }
-  .case:hover .visual-link {
-    transform: translateY(-2px);
   }
   .text {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 14px;
+    align-items: flex-start;
   }
   .name {
     font-weight: 800;
-    font-size: 26px;
+    font-size: clamp(26px, 3vw, 32px);
+    line-height: 1.1;
     letter-spacing: -0.02em;
-    color: var(--ink);
   }
-  .name a {
-    text-decoration: none;
-  }
-  .name a:hover {
-    color: var(--brand);
-    text-decoration: underline;
-    text-underline-offset: 4px;
+  .text p {
+    font-size: 18px;
+    line-height: 1.6;
   }
   .links {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .ext {
-    font-weight: 600;
-    color: var(--muted);
-    font-size: 15px;
+    flex-wrap: wrap;
+    gap: 0 24px;
   }
 </style>

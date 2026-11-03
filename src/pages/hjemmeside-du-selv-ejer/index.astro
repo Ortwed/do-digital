@@ -1,0 +1,335 @@
+---
+import { link } from '../../data/paths';
+import Base from '../../layouts/Base.astro';
+import Check from '../../components/Check.astro';
+import CaseVisual from '../../components/CaseVisual.astro';
+import { cases } from '../../data/cases';
+import { product, priceBullets, threeThings, painPoints, steps, productContact } from '../../data/product';
+
+const rosendal = cases.find((c) => c.slug === 'rosendal-tomrer-entreprise')!;
+const caseFigures = [
+  '[TAL: besøg og henvendelser før og efter]',
+  '[TAL: tidsforbrug fra start til overdragelse]',
+  '[CITAT: indehaveren, når det er godkendt]',
+];
+---
+
+<Base
+  title="Hjemmeside du selv ejer, fast pris 15.000 kr. | D&O Digital"
+  description="Få en færdig hjemmeside, som du ejer fuldt ud, til fast pris 15.000 kr. ekskl. moms. Efter overdragelsen betaler du kun for hosting og mail direkte til udbyderne."
+  contact={productContact}
+>
+  <section class="blue on-dark">
+    <div class="wrap hero">
+      <div class="hero-text">
+        <p class="eyebrow light">Produkt · Fast pris</p>
+        <h1 class="h-hero">Hjemmeside du <span class="hl">selv ejer.</span></h1>
+        <p class="lead">
+          Du får en færdig hjemmeside, som du ejer fuldt ud. Efter overdragelsen betaler du kun for hosting og mail
+          direkte til udbyderne.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-light" href={link('/kontakt/')}>Book afklaringsmøde</a>
+          <a class="btn btn-outline-light" href="#forloeb">Se hvordan det foregår</a>
+        </div>
+      </div>
+      <div class="price-card">
+        <p class="eyebrow">Fast pris</p>
+        <p class="price">
+          <span class="amount">{product.price}</span>
+          <span class="note">{product.priceNote}</span>
+        </p>
+        <hr />
+        <ul>
+          {
+            priceBullets.map((b) => (
+              <li>
+                <Check />
+                <span>{b}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <a class="link-arrow" href={link('/hjemmeside-du-selv-ejer/pris/')}>
+          Se pris og indhold <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section stack-lg" aria-labelledby="huske-h">
+    <h2 id="huske-h" class="h-sec">Tre ting at huske.</h2>
+    <ul class="grid-3">
+      {
+        threeThings.map((t) => (
+          <li class="card top-accent">
+            <h3 class="card-title">{t.title}</h3>
+            <p class="muted big">{t.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="orange-bg on-dark" aria-labelledby="kender-h">
+    <div class="wrap section split">
+      <h2 id="kender-h" class="h-sec">Kender du det?</h2>
+      <ul class="pains">{painPoints.map((p) => <li>{p}</li>)}</ul>
+    </div>
+  </section>
+
+  <section id="forloeb" class="white" aria-labelledby="forloeb-h">
+    <div class="wrap section stack-lg">
+      <div class="stack">
+        <p class="eyebrow">Sådan fungerer det</p>
+        <h2 id="forloeb-h" class="h-l">Seks trin fra første møde til overdragelse.</h2>
+        <p class="muted intro-p">Alle adgange afklares i trin 1, så der ikke kommer overraskelser undervejs.</p>
+      </div>
+      <ol class="steps">
+        {
+          steps.map((s, i) => (
+            <li>
+              <span class="step-num" aria-hidden="true">{i + 1}</span>
+              <h3 class="step-title">
+                <span class="sr-only">Trin {i + 1}: </span>
+                {s.title}
+              </h3>
+              <p class="muted">{s.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section id="case" class="wrap section stack-lg" aria-labelledby="case-h">
+    <div class="stack">
+      <p class="eyebrow">Case</p>
+      <h2 id="case-h" class="h-l">Rosendal Tømrer</h2>
+    </div>
+    <div class="panel">
+      <CaseVisual item={rosendal} height={320} />
+      <div class="case-text">
+        <p class="case-lead">
+          Rosendal Tømrer Entreprise ApS i Hundested er vores første kunde og beviset på, at processen virker.
+        </p>
+        <p class="muted">
+          De havde en hjemmeside, som bureauet ejede, og annoncekonto og design lå også hos bureauet. Nu har vi bygget
+          en ny fra bunden, flyttet domæne og en postkasse på 11,2 GB og overtaget deres Google-profil.
+        </p>
+        <p class="case-punch">Indehaveren ejer nu alt selv og er ikke længere afhængig af bureauet.</p>
+        <div class="links">
+          <a class="link-arrow" href={rosendal.url} rel="noopener">Se hjemmesiden <span aria-hidden="true">↗</span></a>
+          <a class="link-arrow" href={link(`/cases/${rosendal.slug}/`)}>Læs hele casen <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <ul class="figures">{caseFigures.map((f) => <li>{f}</li>)}</ul>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-block: clamp(32px, 5vw, 56px) clamp(64px, 9vw, 104px);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr));
+    gap: 56px;
+    align-items: center;
+  }
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: flex-start;
+  }
+  .light {
+    color: var(--accent-light);
+  }
+  .h-hero {
+    font-size: clamp(46px, 6.8vw, 96px);
+    line-height: 0.99;
+    letter-spacing: -0.04em;
+  }
+  .lead {
+    font-size: clamp(19px, 1.8vw, 22px);
+    max-width: 560px;
+  }
+  .price-card {
+    background: var(--on-dark);
+    color: var(--ink);
+    border-radius: var(--radius-panel);
+    padding: clamp(28px, 4vw, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: flex-start;
+  }
+  .price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 14px;
+  }
+  .amount {
+    font-weight: 800;
+    font-size: clamp(54px, 6vw, 84px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--brand);
+  }
+  .note {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--muted);
+  }
+  hr {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+  .price-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 17px;
+    line-height: 1.45;
+  }
+  .price-card li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .stack-lg {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  .h-sec {
+    font-size: clamp(36px, 5vw, 68px);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+  .grid-3 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 24px;
+  }
+  .top-accent {
+    border-top: 4px solid var(--accent);
+    border-radius: 0 0 var(--radius-card) var(--radius-card);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .card-title {
+    font-size: clamp(26px, 2.6vw, 32px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .big {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  .orange-bg {
+    background: var(--accent);
+    color: #fff;
+  }
+  .orange-bg h2 {
+    color: #fff;
+  }
+  .pains {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid var(--orange-line);
+  }
+  .pains li {
+    border-top: 1px solid var(--orange-line);
+    padding: 24px 0;
+    font-size: clamp(18px, 1.8vw, 20px);
+    line-height: 1.5;
+  }
+  .intro-p {
+    font-size: 19px;
+  }
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+    gap: 24px;
+  }
+  .steps li {
+    background: var(--bg);
+    border-radius: var(--radius-card);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .step-num {
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .step-title {
+    font-size: 24px;
+    letter-spacing: -0.01em;
+  }
+  .panel {
+    background: var(--tint);
+    border-radius: var(--radius-panel);
+    padding: clamp(20px, 4vw, 40px);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+  }
+  .case-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .case-lead {
+    font-size: 19px;
+    line-height: 1.6;
+  }
+  .case-punch {
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.3;
+    color: var(--brand);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 24px;
+  }
+  .figures {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 20px;
+  }
+  .figures li {
+    border: 2px dashed var(--chrome-dot);
+    border-radius: 16px;
+    padding: 24px;
+    min-height: 96px;
+    display: flex;
+    align-items: center;
+    color: var(--muted);
+  }
+</style>

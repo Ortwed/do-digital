@@ -14,8 +14,19 @@
   --on-dark-muted: #c5cedb;
   --on-dark-line: #2d3a63;
   --accent-light: #fdba74;
+  --on-blue-muted: #dce3f5;
+  --blue-line: #6d88cc;
+  --amp-shade: #27479f;
+  --tint-orange: #fce3d3;
+  --orange-line: #f2a47a;
+  --orange-ink: #7c2d12;
+  --chrome: #e1e6f1;
+  --chrome-dot: #9aa6c4;
+  --btn-ink: #14213d;
 
   --radius: 12px;
+  --radius-card: 20px;
+  --radius-panel: 28px;
   --wrap: 1240px;
   --gutter: 40px;
   --section-y: clamp(72px, 9vw, 112px);
@@ -177,7 +188,7 @@ p {
 .btn-light {
   background: var(--accent-light);
   border-color: var(--accent-light);
-  color: var(--ink);
+  color: var(--btn-ink);
   min-height: 54px;
   padding: 0 32px;
   font-size: 17px;
@@ -256,4 +267,58 @@ p {
 }
 .skip-link:focus {
   top: 16px;
+}
+
+/* Kobolt: blå flader, kort og pladsholdere */
+.blue {
+  background: var(--brand);
+  color: var(--on-dark);
+}
+.blue h1,
+.blue h2,
+.blue h3 {
+  color: var(--on-dark);
+}
+.blue .lead {
+  color: var(--on-blue-muted);
+}
+.hl {
+  color: var(--accent-light);
+}
+.btn-outline-light {
+  min-height: 54px;
+  padding: 0 32px;
+  font-size: 17px;
+  color: var(--on-dark);
+  border-color: var(--on-dark);
+}
+.btn-outline-light:hover {
+  background: var(--on-dark);
+  color: var(--brand);
+}
+.white {
+  background: var(--surface);
+}
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 32px;
+}
+.check {
+  flex: none;
+}
+/* Pladsholder for indhold, der ikke er afklaret endnu */
+.ph {
+  display: inline-flex;
+  align-items: center;
+  border: 2px dashed var(--chrome-dot);
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.on-dark .ph {
+  border-color: var(--blue-line);
+  color: var(--on-blue-muted);
 }

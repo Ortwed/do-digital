@@ -20,7 +20,10 @@ Kræver Node 22+.
 Alle virksomhedsoplysninger ligger ét sted: `src/data/site.ts`.
 
 - [ ] Endeligt domæne: ret standardværdien for `site` i `astro.config.mjs` (bruges i canonical, sitemap, Open Graph).
-- [ ] `email`, `phone`, `cvr`
+- [ ] `email`, `phone`, `cvr` i `src/data/site.ts` (vises som [E-MAIL], [TELEFON], [CVR] indtil da)
+- [ ] Priser og omfang i `src/data/product.ts` (vises som stiplede pladsholdere indtil da)
+- [ ] Case-tal og citat på produktsiden, når kunden har givet tilladelse
+- [ ] Kontaktformularen skal kobles til en tjeneste, før den sender noget
 - [ ] Screenshots af cases: læg fx `ortwed.jpg` og `rosendal.jpg` (16:10, ca. 1600×1000) i `public/cases/` og sæt `image: '/cases/ortwed.jpg'` i `src/data/cases.ts`. Indtil da vises en grafisk pladsholder.
 - [ ] Indsend `https://<domæne>/sitemap.xml` i Google Search Console.
 
@@ -43,7 +46,9 @@ Første gang skal Pages slås til: **Settings → Pages → Build and deployment
 | `/cases/` | Oversigt | |
 | `/cases/ortwed-anlaegs-entreprise/` | Case | Hjemmeside til anlægsentreprise, anlægsgartner, belægningsvirksomhed |
 | `/cases/rosendal-tomrer-entreprise/` | Case | Hjemmeside til tømrer, tømrervirksomhed, håndværker |
-| `/kontakt/` | Kontakt | |
+| `/hjemmeside-du-selv-ejer/` | Produktforside | Hjemmeside med eget ejerskab, fast pris |
+| `/hjemmeside-du-selv-ejer/pris/` | Pris og indhold | |
+| `/kontakt/` | Kontakt med formular (demo, sender ikke) | |
 
 ```
 src/
@@ -60,6 +65,8 @@ public/
 ```
 
 ## Design
+
+Designudkast og brief ligger i `design/` (`BRIEF.md` + `*.dc.html`). Stilen er "Kobolt".
 
 Farvekombination 06 *Kobolt og orange* fra logoudkastet:
 

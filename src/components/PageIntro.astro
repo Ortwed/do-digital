@@ -2,26 +2,44 @@
 interface Props {
   eyebrow: string;
   title: string;
+  /** Del af overskriften, der fremhæves i lys orange. */
+  highlight?: string;
   lead?: string;
 }
-const { eyebrow, title, lead } = Astro.props;
+const { eyebrow, title, highlight, lead } = Astro.props;
 ---
 
-<section class="wrap intro">
-  <p class="eyebrow">{eyebrow}</p>
-  <h1 class="h-xl">{title}</h1>
-  {lead && <p class="lead">{lead}</p>}
-  <slot />
+<section class="blue on-dark">
+  <div class="wrap intro">
+    <p class="eyebrow light">{eyebrow}</p>
+    <h1 class="h-hero">
+      {title}
+      {highlight && <>{' '}<span class="hl">{highlight}</span></>}
+    </h1>
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
 </section>
 
 <style>
   .intro {
-    padding-block: clamp(48px, 7vw, 72px) clamp(56px, 8vw, 96px);
+    padding-block: clamp(32px, 5vw, 48px) clamp(64px, 8vw, 88px);
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 26px;
+    align-items: flex-start;
   }
-  h1 {
+  .light {
+    color: var(--accent-light);
+  }
+  .h-hero {
     max-width: 1000px;
+    font-size: clamp(40px, 6.8vw, 96px);
+    line-height: 0.99;
+    letter-spacing: -0.04em;
+  }
+  .lead {
+    font-size: clamp(19px, 1.8vw, 22px);
+    max-width: 680px;
   }
 </style>
