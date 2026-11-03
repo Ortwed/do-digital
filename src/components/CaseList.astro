@@ -1,4 +1,5 @@
 ---
+import { link } from '../data/paths';
 import CaseVisual from './CaseVisual.astro';
 import { cases } from '../data/cases';
 interface Props {
@@ -12,17 +13,17 @@ const H = headingLevel;
   {
     cases.map((c) => (
       <li class="case">
-        <a href={`/cases/${c.slug}/`} class="visual-link" tabindex="-1" aria-hidden="true">
+        <a href={link(`/cases/${c.slug}/`)} class="visual-link" tabindex="-1" aria-hidden="true">
           <CaseVisual item={c} />
         </a>
         <div class="text">
           <H class="name">
-            <a href={`/cases/${c.slug}/`}>{c.client}</a>
+            <a href={link(`/cases/${c.slug}/`)}>{c.client}</a>
           </H>
           <p class="muted">{c.teaser}</p>
         </div>
         <div class="links">
-          <a class="link-arrow" href={`/cases/${c.slug}/`}>
+          <a class="link-arrow" href={link(`/cases/${c.slug}/`)}>
             Læs casen <span aria-hidden="true">→</span>
           </a>
           <a class="link-arrow ext" href={c.url} rel="noopener">

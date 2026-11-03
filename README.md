@@ -19,10 +19,19 @@ Kræver Node 22+.
 
 Alle virksomhedsoplysninger ligger ét sted: `src/data/site.ts`.
 
-- [ ] `url`: endeligt domæne (bruges i canonical, sitemap, Open Graph). Ret også `site` i `astro.config.mjs`.
+- [ ] Endeligt domæne: ret standardværdien for `site` i `astro.config.mjs` (bruges i canonical, sitemap, Open Graph).
 - [ ] `email`, `phone`, `cvr`
 - [ ] Screenshots af cases: læg fx `ortwed.jpg` og `rosendal.jpg` (16:10, ca. 1600×1000) i `public/cases/` og sæt `image: '/cases/ortwed.jpg'` i `src/data/cases.ts`. Indtil da vises en grafisk pladsholder.
 - [ ] Indsend `https://<domæne>/sitemap.xml` i Google Search Console.
+
+## Testsite på GitHub Pages
+
+Hver push til `main` bygger og publicerer sitet via `.github/workflows/deploy.yml` til
+https://ortwed.github.io/do-digital/
+
+Testsitet bygges med `PUBLIC_NOINDEX=true`, så det ikke kommer i Googles søgeresultater. Fjern linjen i workflowet, når sitet skal i søgeresultaterne.
+
+Første gang skal Pages slås til: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 ## Struktur
 
@@ -39,6 +48,7 @@ Alle virksomhedsoplysninger ligger ét sted: `src/data/site.ts`.
 ```
 src/
   data/site.ts       virksomhedsoplysninger, ydelser, ejerskabsliste
+  data/paths.ts      link()/abs() så links virker både på eget domæne og i undermappe
   data/cases.ts      cases (ny case = nyt objekt; siden genereres automatisk)
   data/logo.ts       udtegnet "&" til logoet
   layouts/Base.astro <head>, SEO-meta, JSON-LD, header og footer

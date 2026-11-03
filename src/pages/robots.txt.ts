@@ -1,7 +1,9 @@
 import type { APIRoute } from 'astro';
-import { site } from '../data/site';
+import { abs, NOINDEX } from '../data/paths';
 
+// Testsites (PUBLIC_NOINDEX=true) lukkes for søgemaskiner.
 export const GET: APIRoute = () =>
-  new Response(`User-agent: *\nAllow: /\n\nSitemap: ${new URL('/sitemap.xml', site.url).href}\n`, {
-    headers: { 'Content-Type': 'text/plain' },
-  });
+  new Response(
+    NOINDEX ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\n\nSitemap: ${abs('/sitemap.xml')}\n`,
+    { headers: { 'Content-Type': 'text/plain' } },
+  );

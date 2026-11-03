@@ -1,4 +1,5 @@
 ---
+import { link, abs, NOINDEX } from '../data/paths';
 import '@fontsource/manrope/400.css';
 import '@fontsource/manrope/500.css';
 import '@fontsource/manrope/600.css';
@@ -18,16 +19,16 @@ interface Props {
   noindex?: boolean;
 }
 const { title, description = site.description, schema = [], contact, noindex = false } = Astro.props;
-const canonical = new URL(Astro.url.pathname, site.url).href;
-const ogImage = new URL('/og.png', site.url).href;
+const canonical = new URL(Astro.url.pathname, abs('/')).href;
+const ogImage = abs('/og.png');
 
 const organization = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  '@id': `${site.url}/#organization`,
+  '@id': abs('/#organization'),
   name: site.name,
-  url: site.url,
-  logo: new URL('/logo.svg', site.url).href,
+  url: abs('/'),
+  logo: abs('/logo.svg'),
   description: site.description,
   slogan: site.principle,
   email: site.email,
@@ -53,9 +54,9 @@ const organization = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex" />}
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="sitemap" href="/sitemap.xml" />
+    {(noindex || NOINDEX) && <meta name="robots" content="noindex" />}
+    <link rel="icon" href={link('/favicon.svg')} type="image/svg+xml" />
+    <link rel="sitemap" href={link('/sitemap.xml')} />
     <meta name="theme-color" content="#1F3A8A" />
 
     <meta property="og:type" content="website" />

@@ -1,8 +1,8 @@
 ---
+import { link, abs } from '../../data/paths';
 import Base from '../../layouts/Base.astro';
 import CaseVisual from '../../components/CaseVisual.astro';
 import { cases, type Case } from '../../data/cases';
-import { site } from '../../data/site';
 
 export function getStaticPaths() {
   return cases.map((item) => ({ params: { slug: item.slug }, props: { item } }));
@@ -10,15 +10,15 @@ export function getStaticPaths() {
 
 const { item } = Astro.props as { item: Case };
 const others = cases.filter((c) => c.slug !== item.slug);
-const pageUrl = new URL(`/cases/${item.slug}/`, site.url).href;
+const pageUrl = abs(`/cases/${item.slug}/`);
 
 const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Forside', item: site.url + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Cases', item: new URL('/cases/', site.url).href },
+      { '@type': 'ListItem', position: 1, name: 'Forside', item: abs('/') },
+      { '@type': 'ListItem', position: 2, name: 'Cases', item: abs('/cases/') },
       { '@type': 'ListItem', position: 3, name: item.client, item: pageUrl },
     ],
   },
@@ -27,7 +27,7 @@ const schema = [
     '@type': 'CreativeWork',
     name: `Ny hjemmeside til ${item.client}`,
     url: item.url,
-    creator: { '@id': `${site.url}/#organization` },
+    creator: { '@id': abs('/#organization') },
     about: { '@type': 'Organization', name: item.client, url: item.url },
   },
 ];
@@ -37,7 +37,7 @@ const schema = [
   <article>
     <header class="wrap intro">
       <nav aria-label="Brødkrumme" class="crumbs">
-        <a href="/cases/">Cases</a> <span aria-hidden="true">/</span> <span>{item.client}</span>
+        <a href={link('/cases/')}>Cases</a> <span aria-hidden="true">/</span> <span>{item.client}</span>
       </nav>
       <p class="eyebrow">Ny hjemmeside til {item.client}</p>
       <h1 class="h-xl">{item.headline}</h1>
@@ -91,7 +91,7 @@ const schema = [
       </div>
       <div class="stack">
         <p class="lead">{item.forYou.body}</p>
-        <div class="btn-row"><a class="btn btn-primary" href="/kontakt/">Kontakt os</a></div>
+        <div class="btn-row"><a class="btn btn-primary" href={link('/kontakt/')}>Kontakt os</a></div>
       </div>
     </div>
   </aside>
@@ -101,7 +101,7 @@ const schema = [
       <nav class="wrap section more" aria-label="Flere cases">
         <p class="eyebrow">Næste case</p>
         {others.map((o) => (
-          <a class="next" href={`/cases/${o.slug}/`}>
+          <a class="next" href={link(`/cases/${o.slug}/`)}>
             <span class="h-l">{o.client}</span>
             <span class="muted">{o.teaser}</span>
           </a>
