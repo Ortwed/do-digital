@@ -2,8 +2,6 @@
 
 export const site = {
   name: 'D&O Digital',
-  // TODO: Ret til det endelige domæne. Bruges til canonical-links, sitemap og deling på sociale medier.
-  url: 'https://dodigital.dk',
   payoff: 'Dit digitale. Dit ejerskab.',
   tagline: 'Dit digitale fundament. Dit ejerskab. Din frihed.',
   principle: 'Du skal eje det, du betaler for.',

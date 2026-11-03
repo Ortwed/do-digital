@@ -1,4 +1,5 @@
 ---
+import { link } from '../data/paths';
 import Base from '../layouts/Base.astro';
 import CaseList from '../components/CaseList.astro';
 import { services, ownership, site } from '../data/site';
@@ -34,8 +35,8 @@ const pillars = [
         bindinger og leverandørafhængighed.
       </p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="/kontakt/">Kontakt os</a>
-        <a class="btn btn-secondary" href="/cases/">Se cases</a>
+        <a class="btn btn-primary" href={link('/kontakt/')}>Kontakt os</a>
+        <a class="btn btn-secondary" href={link('/cases/')}>Se cases</a>
       </div>
     </div>
   </section>
@@ -49,7 +50,7 @@ const pillars = [
           Vi hjælper med hjemmeside, hosting og e-mail, så du får et digitalt fundament, du selv ejer og frit kan vælge
           at videreudvikle.
         </p>
-        <a class="link-arrow" href="/ydelser/">Se alle ydelser <span aria-hidden="true">→</span></a>
+        <a class="link-arrow" href={link('/ydelser/')}>Se alle ydelser <span aria-hidden="true">→</span></a>
       </div>
       <ul class="rule-list">
         {
@@ -113,7 +114,7 @@ const pillars = [
         </p>
         <p class="sign">{site.founders.join(' og ')}, stiftere</p>
       </div>
-      <a class="link-arrow on-blue" href="/om-os/">Læs vores historie <span aria-hidden="true">→</span></a>
+      <a class="link-arrow on-blue" href={link('/om-os/')}>Læs vores historie <span aria-hidden="true">→</span></a>
     </div>
   </section>
 

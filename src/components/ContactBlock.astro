@@ -1,4 +1,5 @@
 ---
+import { link } from '../data/paths';
 import Logo from './Logo.astro';
 import { site } from '../data/site';
 
@@ -32,7 +33,7 @@ const tel = site.phone.replace(/\s+/g, '');
   </div>
   <footer class="footer">
     <div class="wrap footer-inner">
-      <a href="/" aria-label="D&O Digital, forside" class="home"><Logo variant="negative" size={35} /></a>
+      <a href={link('/')} aria-label="D&O Digital, forside" class="home"><Logo variant="negative" size={35} /></a>
       <p>{site.tagline}</p>
       <p class="small">
         © {new Date().getFullYear()} {site.name}{site.cvr && ` · CVR ${site.cvr}`}

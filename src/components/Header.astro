@@ -1,14 +1,15 @@
 ---
+import { link } from '../data/paths';
 import Logo from './Logo.astro';
 import { nav } from '../data/site';
 
 const path = Astro.url.pathname;
-const isActive = (href: string) => path === href || path.startsWith(href);
+const isActive = (href: string) => path === link(href) || path.startsWith(link(href));
 ---
 
 <div class="bar">
   <header class="wrap">
-    <a href="/" class="home" aria-label="D&O Digital, forside">
+    <a href={link('/')} class="home" aria-label="D&O Digital, forside">
       <Logo />
     </a>
     <nav aria-label="Hovedmenu">
@@ -16,14 +17,14 @@ const isActive = (href: string) => path === href || path.startsWith(href);
         {
           nav.map((item) => (
             <li>
-              <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+              <a href={link(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>
                 {item.label}
               </a>
             </li>
           ))
         }
         <li>
-          <a href="/kontakt/" class="cta" aria-current={isActive('/kontakt/') ? 'page' : undefined}>
+          <a href={link('/kontakt/')} class="cta" aria-current={isActive('/kontakt/') ? 'page' : undefined}>
             Kontakt os
           </a>
         </li>
