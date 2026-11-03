@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { cases } from '../data/cases';
 import { abs } from '../data/paths';
 
-const paths = ['/', '/ydelser/', '/om-os/', '/cases/', ...cases.map((c) => `/cases/${c.slug}/`), '/kontakt/'];
+const paths = ['/', '/ydelser/', '/hjemmeside-du-selv-ejer/', '/hjemmeside-du-selv-ejer/pris/', '/om-os/', '/cases/', ...cases.map((c) => `/cases/${c.slug}/`), '/kontakt/'];
 
 export const GET: APIRoute = () => {
   const urls = paths.map((p) => `  <url><loc>${abs(p)}</loc></url>`).join('\n');

@@ -7,7 +7,8 @@ import '@fontsource/manrope/700.css';
 import '@fontsource/manrope/800.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
-import ContactBlock from '../components/ContactBlock.astro';
+import ContactBlock, { type ContactProps } from '../components/ContactBlock.astro';
+import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
 
 interface Props {
@@ -15,7 +16,8 @@ interface Props {
   description?: string;
   /** Ekstra JSON-LD-objekter til denne side. */
   schema?: Record<string, unknown>[];
-  contact?: { heading?: string; text?: string };
+  /** Kontaktsektion nederst. false fjerner den (fx på kontaktsiden). */
+  contact?: ContactProps | false;
   noindex?: boolean;
 }
 const { title, description = site.description, schema = [], contact, noindex = false } = Astro.props;
@@ -31,7 +33,7 @@ const organization = {
   logo: abs('/logo.svg'),
   description: site.description,
   slogan: site.principle,
-  email: site.email,
+  ...(site.email && { email: site.email }),
   ...(site.phone && { telephone: site.phone }),
   ...(site.cvr && { vatID: `DK${site.cvr}` }),
   areaServed: { '@type': 'Country', name: 'Danmark' },
@@ -77,7 +79,8 @@ const organization = {
     <Header />
     <main id="indhold">
       <slot />
+      {contact !== false && <ContactBlock {...contact} />}
     </main>
-    <ContactBlock {...contact} />
+    <Footer />
   </body>
 </html>

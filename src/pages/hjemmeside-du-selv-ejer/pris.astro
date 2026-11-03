@@ -1,0 +1,255 @@
+---
+import { link } from '../../data/paths';
+import Base from '../../layouts/Base.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import Check from '../../components/Check.astro';
+import { product, includes, ownershipTable, addons, productContact } from '../../data/product';
+---
+
+<Base
+  title="Pris og indhold: hjemmeside du selv ejer | D&O Digital"
+  description="Én fast pris på 15.000 kr. ekskl. moms. Se hvad du får, hvad du ejer, og hvad du selv betaler direkte til udbyderne for hosting og mail."
+  contact={productContact}
+>
+  <PageIntro
+    eyebrow="Pris og indhold"
+    title="Én fast pris."
+    highlight="Du ejer det hele."
+    lead="15.000 kr. ekskl. moms. Efter overdragelsen betaler du kun for hosting og mail til udbyderne og for det, du selv vælger at tilkøbe."
+  />
+
+  <section class="wrap section stack-lg" aria-labelledby="faar-h">
+    <div class="stack start">
+      <p class="eyebrow">Hvad du får</p>
+      <h2 id="faar-h" class="h-l">En komplet hjemmeside, du kan måle på.</h2>
+      {product.scope ? <p class="muted">{product.scope}</p> : <p class="ph">[ANTAL SIDER OG CASES AFKLARES]</p>}
+    </div>
+    <ul class="includes">
+      {
+        includes.map((t) => (
+          <li class="card inc">
+            <Check size={28} color="var(--accent)" />
+            <span>{t}</span>
+          </li>
+        ))
+      }
+      <li class="card price-tile blue on-dark">
+        <span class="amount">{product.price}</span>
+        <span class="note">{product.priceNote}, fast pris</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="white" aria-labelledby="ejer-h">
+    <div class="wrap section stack-md">
+      <div class="stack">
+        <p class="eyebrow">Hvad du ejer og selv betaler</p>
+        <h2 id="ejer-h" class="h-l">Du ejer alt og betaler direkte til udbyderne.</h2>
+        <p class="muted intro-p">Uden mellemled. Vi tjener ikke på din hosting eller din mail.</p>
+      </div>
+      <div class="table-box" role="region" aria-labelledby="ejer-h" tabindex="0">
+        <table class="tbl">
+          <caption class="sr-only">Hvad du ejer, og hvem der betaler</caption>
+          <thead>
+            <tr>
+              <th scope="col">Hvad</th>
+              <th scope="col">Ejer</th>
+              <th scope="col">Betaler</th>
+              <th scope="col">Bemærkning</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              ownershipTable.map((r) => (
+                <tr>
+                  <th scope="row">{r.what}</th>
+                  <td class="owner">{r.owner}</td>
+                  <td>{r.payer}</td>
+                  <td>{r.note}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section stack-lg" aria-labelledby="tilkoeb-h">
+    <div class="stack">
+      <p class="eyebrow">Valgfrie tilkøb</p>
+      <h2 id="tilkoeb-h" class="h-l">Intet af det her er påkrævet.</h2>
+      <p class="muted intro-p">Du får altid dokumentation, så en anden kan overtage.</p>
+    </div>
+    <ul class="addons">
+      {
+        addons.map((a) => (
+          <li class="card addon">
+            <h3 class="addon-title">{a.title}</h3>
+            <p class="muted">{a.body}</p>
+            {a.price ? <p class="addon-price">{a.price}</p> : a.placeholder && <p class="ph">{a.placeholder}</p>}
+          </li>
+        ))
+      }
+    </ul>
+    <div class="ads">
+      <h3 class="ads-title">Google Ads og annoncekroner er ikke med.</h3>
+      <p>
+        Hvis du vil annoncere, kan vi anbefale et bureau, der passer til dig. Annoncekroner betaler du altid direkte til
+        Google, og annoncekontoen og adgangene står i dit eget navn.
+      </p>
+    </div>
+    <p>
+      <a class="link-arrow" href={link('/hjemmeside-du-selv-ejer/')}>
+        <span aria-hidden="true">←</span> Tilbage til Hjemmeside du selv ejer
+      </a>
+    </p>
+  </section>
+</Base>
+
+<style>
+  .stack-lg {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+  .stack-md {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .start {
+    align-items: flex-start;
+  }
+  .intro-p {
+    font-size: 19px;
+    max-width: 700px;
+  }
+  .includes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+    gap: 20px;
+  }
+  .inc {
+    padding: 28px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .price-tile {
+    background: var(--brand);
+    color: var(--on-dark);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+  }
+  .price-tile .amount {
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .price-tile .note {
+    font-size: 16px;
+    color: var(--on-blue-muted);
+  }
+  .table-box {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--surface);
+  }
+  .table-box:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .tbl {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 780px;
+  }
+  .tbl thead th {
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 18px 20px;
+    border-bottom: 2px solid var(--brand);
+  }
+  .tbl tbody th,
+  .tbl td {
+    text-align: left;
+    padding: 20px;
+    border-bottom: 1px solid var(--chrome);
+    font-size: 17px;
+    line-height: 1.45;
+    vertical-align: top;
+    color: var(--muted);
+  }
+  .tbl tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+  .tbl tbody th {
+    font-weight: 800;
+    color: var(--brand);
+  }
+  .tbl .owner {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .addons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+    gap: 20px;
+  }
+  .addon {
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .addon-title {
+    font-size: 24px;
+    letter-spacing: -0.01em;
+  }
+  .addon .ph,
+  .addon-price {
+    margin-top: 4px;
+  }
+  .addon-price {
+    font-weight: 800;
+    color: var(--brand);
+  }
+  .ads {
+    background: var(--tint-orange);
+    border-radius: var(--radius-panel);
+    padding: clamp(24px, 4vw, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .ads-title {
+    font-size: clamp(26px, 3vw, 36px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--orange-ink);
+  }
+  .ads p {
+    max-width: 820px;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+</style>

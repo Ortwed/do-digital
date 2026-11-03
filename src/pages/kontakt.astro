@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageIntro from '../components/PageIntro.astro';
+import { site } from '../data/site';
 
 const topics = [
   'Du skal have en ny hjemmeside.',
@@ -8,26 +9,151 @@ const topics = [
   'Du er i tvivl om, hvem der ejer dit domæne og din hjemmeside.',
   'Du har brug for hjælp til at vedligeholde og videreudvikle det, du har.',
 ];
+const tel = site.phone.replace(/\s+/g, '');
 ---
 
 <Base
-  title="Kontakt D&O Digital | Hjemmeside, hosting og e-mail"
-  description="Kontakt D&O Digital og tag en uforpligtende snak om din hjemmeside, hosting og e-mail. Vi hjælper mindre virksomheder med at eje deres digitale løsninger."
-  contact={{ heading: 'Lad os tage en snak.', text: 'Skriv eller ring, så vender vi tilbage.' }}
+  title="Kontakt D&O Digital | Book et afklaringsmøde"
+  description="Kontakt D&O Digital og book et afklaringsmøde om din hjemmeside, hosting og e-mail. Vi hjælper mindre virksomheder med at eje deres digitale løsninger."
+  contact={false}
 >
   <PageIntro
     eyebrow="Kontakt"
-    title="Få styr på dit digitale fundament."
-    lead="Kontakt os, så tager vi en snak om din hjemmeside, hosting og e-mail. Du forpligter dig ikke til noget."
+    title="Næste skridt er et"
+    highlight={'afklarings\u00ADmøde.'}
+    lead="Skriv til os, så tager vi en snak om din hjemmeside, hosting og e-mail. Bagefter får du en liste over de adgange, vi skal bruge for at komme i gang."
   />
-  <section class="wrap section-b split">
-    <h2 class="h-l">Typisk kontakter man os, når</h2>
-    <ul class="rule-list">{topics.map((t) => <li class="h-m">{t}</li>)}</ul>
+
+  <section class="wrap section split">
+    <div class="stack">
+      <h2 class="h-l">Skriv til os</h2>
+      <p class="muted">Du forpligter dig ikke til noget.</p>
+      <dl class="direct">
+        <div>
+          <dt>Telefon</dt>
+          <dd>{site.phone ? <a href={`tel:${tel}`}>{site.phone}</a> : '[TELEFON]'}</dd>
+        </div>
+        <div>
+          <dt>E-mail</dt>
+          <dd>{site.email ? <a href={`mailto:${site.email}`}>{site.email}</a> : '[E-MAIL]'}</dd>
+        </div>
+      </dl>
+      <h3 class="h-m topics-h">Typisk kontakter man os, når</h3>
+      <ul class="rule-list topics">{topics.map((t) => <li>{t}</li>)}</ul>
+    </div>
+
+    <form class="form card" id="kontaktformular" novalidate>
+      <div class="field">
+        <label for="navn">Navn</label>
+        <input id="navn" name="navn" type="text" autocomplete="name" required />
+      </div>
+      <div class="field">
+        <label for="telefon">Telefon</label>
+        <input id="telefon" name="telefon" type="tel" autocomplete="tel" inputmode="tel" />
+      </div>
+      <div class="field">
+        <label for="email">E-mail</label>
+        <input id="email" name="email" type="email" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for="besked">Besked</label>
+        <textarea id="besked" name="besked" rows="6" required></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">Send besked</button>
+      <p class="status" role="status" aria-live="polite"></p>
+    </form>
   </section>
 </Base>
 
+<script>
+  // Demo: formularen sender ikke noget endnu.
+  const form = document.getElementById('kontaktformular') as HTMLFormElement | null;
+  const status = form?.querySelector('.status');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    if (status) status.textContent = 'Tak. Dette er en demo, så beskeden er ikke sendt.';
+    form.reset();
+  });
+</script>
+
 <style>
-  .section-b {
-    padding-bottom: var(--section-y);
+  .direct {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 48px;
+    margin: 8px 0 0;
+  }
+  dt {
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  dd {
+    margin: 4px 0 0;
+    font-weight: 700;
+    font-size: 18px;
+  }
+  dd a {
+    color: var(--brand);
+  }
+  .topics-h {
+    margin-top: 24px;
+  }
+  .topics li {
+    padding: 18px 0;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: clamp(24px, 4vw, 40px);
+    border-radius: var(--radius-panel);
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  label {
+    font-weight: 700;
+    font-size: 15px;
+  }
+  input,
+  textarea {
+    font: inherit;
+    font-size: 17px;
+    color: var(--ink);
+    min-height: 52px;
+    padding: 12px 16px;
+    border: 2px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  textarea {
+    resize: vertical;
+  }
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+    border-color: var(--brand);
+  }
+  button {
+    align-self: flex-start;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .status {
+    font-weight: 600;
+    color: var(--brand);
+  }
+  .status:empty {
+    display: none;
   }
 </style>

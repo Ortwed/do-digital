@@ -1,4 +1,5 @@
 ---
+import { link } from '../data/paths';
 import Base from '../layouts/Base.astro';
 import PageIntro from '../components/PageIntro.astro';
 import { services, ownership } from '../data/site';
@@ -29,7 +30,15 @@ const steps = [
             <li>
               <span class="num">{String(i + 1).padStart(2, '0')}</span>
               <h2 class="h-m">{s.title}</h2>
-              <p class="muted">{s.body}</p>
+              <p class="muted">
+                {s.body}
+                {i === 0 && (
+                  <>
+                    {' '}
+                    <a class="inline-link" href={link('/hjemmeside-du-selv-ejer/')}>Se Hjemmeside du selv ejer til fast pris</a>.
+                  </>
+                )}
+              </p>
             </li>
           ))
         }
@@ -83,6 +92,11 @@ const steps = [
 </Base>
 
 <style>
+  .inline-link {
+    color: var(--brand);
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
   .white {
     background: var(--surface);
   }

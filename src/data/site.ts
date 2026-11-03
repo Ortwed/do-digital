@@ -9,16 +9,17 @@ export const site = {
     'D&O Digital bygger hjemmesider til mindre virksomheder, der vil eje deres digitale løsninger selv. Hjemmeside, hosting og e-mail uden binding.',
   founders: ['Christian Ortwed', 'Jakob Daugaard'],
 
-  // TODO: Udfyld kontaktoplysninger og CVR.
-  email: 'kontakt@dodigital.dk',
+  // TODO: Udfyld kontaktoplysninger og CVR. Tomme felter vises som [E-MAIL], [TELEFON] og [CVR].
+  email: '',
   phone: '', // fx '+45 12 34 56 78'
   cvr: '',
 };
 
 export const nav = [
   { href: '/ydelser/', label: 'Ydelser' },
-  { href: '/om-os/', label: 'Om os' },
+  { href: '/hjemmeside-du-selv-ejer/', label: 'Hjemmeside du selv ejer' },
   { href: '/cases/', label: 'Cases' },
+  { href: '/om-os/', label: 'Om os' },
 ];
 
 export const services = [
