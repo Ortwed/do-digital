@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { services, ownership } from '../data/site';
+
+const steps = [
+  { title: 'Overblik', body: 'Vi finder ud af, hvad du har i dag, og hvem der ejer domæne, hosting, e-mail og hjemmeside.' },
+  { title: 'Plan', body: 'Du får en enkel plan for, hvad der skal bygges eller flyttes, og hvad det betyder for dig.' },
+  { title: 'Byg og flyt', body: 'Vi bygger hjemmesiden og sætter hosting og e-mail op, så det ligger i dit navn.' },
+  { title: 'Overdragelse', body: 'Du får adgang til det hele og ved, hvordan det fungerer. Derefter bestemmer du selv.' },
+];
+---
+
+<Base
+  title="Hjemmeside, hosting og e-mail med eget ejerskab | D&O Digital"
+  description="Hjemmesider til små virksomheder, hosting til mindre virksomheder og hjælp til flytning af hjemmeside og e-mail. Du ejer det hele, uden binding."
+>
+  <PageIntro
+    eyebrow="Ydelser"
+    title="Vi bygger løsninger. Ikke afhængighed."
+    lead="Vi hjælper mindre virksomheder med at få styr på deres digitale fundament. Vi gør det tekniske overskueligt og sørger for, at du ved, hvad du ejer, og hvordan det fungerer."
+  />
+
+  <section class="white">
+    <div class="wrap section">
+      <ul class="rule-list services">
+        {
+          services.map((s, i) => (
+            <li>
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>
+              <h2 class="h-m">{s.title}</h2>
+              <p class="muted">{s.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-labelledby="flyt-h">
+    <div class="split">
+      <div class="stack">
+        <p class="eyebrow">Flytning af hjemmeside og e-mail</p>
+        <h2 id="flyt-h" class="h-l">Få dine løsninger tilbage på egne hænder</h2>
+        <p class="lead">
+          Nogle opdager først problemet, når de ønsker at skifte leverandør. Hjemmesiden kan ikke flyttes, e-mailen er
+          bundet til en bestemt løsning, eller der skal betales endnu en gang for adgang til noget, man troede, man
+          ejede. Vi hjælper med at rydde op.
+        </p>
+      </div>
+      <ol class="steps">
+        {
+          steps.map((s, i) => (
+            <li>
+              <span class="num">{i + 1}</span>
+              <div>
+                <h3 class="h-m">{s.title}</h3>
+                <p class="muted">{s.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="white" aria-labelledby="ejer-h">
+    <div class="wrap section stack">
+      <p class="eyebrow">Ejerskab af hjemmeside og domæne</p>
+      <h2 id="ejer-h" class="h-l">Det skal du eje selv</h2>
+      <ul class="owns">
+        {
+          ownership.map((o) => (
+            <li>
+              <h3 class="h-m">{o.title}</h3>
+              <p class="muted">{o.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .white {
+    background: var(--surface);
+  }
+  .services li {
+    display: grid !important;
+    grid-template-columns: 48px minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: 8px 32px;
+    align-items: baseline;
+  }
+  @media (max-width: 820px) {
+    .services li {
+      grid-template-columns: 1fr;
+    }
+  }
+  .num {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .steps li {
+    display: flex;
+    gap: 20px;
+  }
+  .steps .num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--brand);
+    color: var(--brand);
+    font-size: 16px;
+  }
+  .owns {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: 32px;
+  }
+  .owns li {
+    border-top: 2px solid var(--brand);
+    padding-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+</style>

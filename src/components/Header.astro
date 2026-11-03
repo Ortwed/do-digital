@@ -1,0 +1,93 @@
+---
+import Logo from './Logo.astro';
+import { nav } from '../data/site';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path.startsWith(href);
+---
+
+<div class="bar">
+  <header class="wrap">
+    <a href="/" class="home" aria-label="D&O Digital, forside">
+      <Logo />
+    </a>
+    <nav aria-label="Hovedmenu">
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="/kontakt/" class="cta" aria-current={isActive('/kontakt/') ? 'page' : undefined}>
+            Kontakt os
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</div>
+
+<style>
+  .bar {
+    border-bottom: 1px solid var(--line);
+  }
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 32px;
+    min-height: 88px;
+    padding-block: 12px;
+  }
+  .home {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: none;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    text-decoration: none;
+    text-underline-offset: 5px;
+  }
+  nav a:hover,
+  nav a[aria-current='page'] {
+    color: var(--brand);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+  nav a.cta {
+    font-weight: 700;
+    color: var(--brand);
+    text-decoration: underline;
+  }
+  @media (max-width: 480px) {
+    header {
+      min-height: 0;
+      padding-block: 16px 8px;
+    }
+    ul {
+      gap: 0 20px;
+    }
+  }
+</style>

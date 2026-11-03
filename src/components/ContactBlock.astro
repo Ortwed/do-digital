@@ -1,0 +1,110 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+
+interface Props {
+  heading?: string;
+  text?: string;
+}
+const {
+  heading = 'Få styr på dit digitale fundament.',
+  text = 'Kontakt os, så tager vi en snak om din hjemmeside, hosting og e-mail.',
+} = Astro.props;
+const tel = site.phone.replace(/\s+/g, '');
+---
+
+<section class="contact on-dark" aria-labelledby="kontakt-heading">
+  <div class="wrap inner">
+    <h2 id="kontakt-heading" class="h-xl">{heading}</h2>
+    <p class="lead">{text}</p>
+    <div class="row">
+      <a class="btn btn-light" href={`mailto:${site.email}`}>Skriv til os</a>
+      <div class="details">
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        {site.phone && (
+          <>
+            <span aria-hidden="true">·</span>
+            <a href={`tel:${tel}`}>{site.phone}</a>
+          </>
+        )}
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <a href="/" aria-label="D&O Digital, forside" class="home"><Logo variant="negative" size={35} /></a>
+      <p>{site.tagline}</p>
+      <p class="small">
+        © {new Date().getFullYear()} {site.name}{site.cvr && ` · CVR ${site.cvr}`}
+      </p>
+    </div>
+  </footer>
+</section>
+
+<style>
+  .contact {
+    background: var(--dark);
+    color: var(--on-dark);
+  }
+  .inner {
+    padding-block: var(--section-y) 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: flex-start;
+  }
+  h2 {
+    color: var(--on-dark);
+    max-width: 1000px;
+    font-size: clamp(42px, 6.6vw, 96px);
+    line-height: 1;
+  }
+  .lead {
+    color: var(--on-dark-muted);
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 32px;
+  }
+  .details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    font-weight: 600;
+    font-size: 17px;
+  }
+  .details a {
+    text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .details a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .details span {
+    display: inline-flex;
+    align-items: center;
+  }
+  .footer {
+    border-top: 1px solid var(--on-dark-line);
+  }
+  .footer-inner {
+    padding-block: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px 40px;
+    color: var(--on-dark-muted);
+  }
+  .home {
+    text-decoration: none;
+  }
+  .small {
+    font-size: 14px;
+  }
+</style>

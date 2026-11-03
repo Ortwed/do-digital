@@ -1,0 +1,216 @@
+---
+import Base from '../../layouts/Base.astro';
+import CaseVisual from '../../components/CaseVisual.astro';
+import { cases, type Case } from '../../data/cases';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return cases.map((item) => ({ params: { slug: item.slug }, props: { item } }));
+}
+
+const { item } = Astro.props as { item: Case };
+const others = cases.filter((c) => c.slug !== item.slug);
+const pageUrl = new URL(`/cases/${item.slug}/`, site.url).href;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Forside', item: site.url + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Cases', item: new URL('/cases/', site.url).href },
+      { '@type': 'ListItem', position: 3, name: item.client, item: pageUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: `Ny hjemmeside til ${item.client}`,
+    url: item.url,
+    creator: { '@id': `${site.url}/#organization` },
+    about: { '@type': 'Organization', name: item.client, url: item.url },
+  },
+];
+---
+
+<Base title={`${item.seo.title} | D&O Digital`} description={item.seo.description} schema={schema}>
+  <article>
+    <header class="wrap intro">
+      <nav aria-label="Brødkrumme" class="crumbs">
+        <a href="/cases/">Cases</a> <span aria-hidden="true">/</span> <span>{item.client}</span>
+      </nav>
+      <p class="eyebrow">Ny hjemmeside til {item.client}</p>
+      <h1 class="h-xl">{item.headline}</h1>
+      <div class="meta">
+        <dl>
+          <div><dt>Kunde</dt><dd>{item.client}</dd></div>
+          <div><dt>Branche</dt><dd>{item.industry}</dd></div>
+          <div><dt>Leveret</dt><dd>Hjemmeside og digitalt ejerskab</dd></div>
+        </dl>
+        <a class="btn btn-primary" href={item.url} rel="noopener">Se {item.domain} <span aria-hidden="true">&nbsp;↗</span></a>
+      </div>
+    </header>
+
+    <div class="wrap">
+      <CaseVisual item={item} large />
+    </div>
+
+    <div class="wrap section body">
+      <div class="prose lead-prose">
+        {item.intro.map((p) => <p>{p}</p>)}
+      </div>
+
+      <section class="split block" aria-labelledby="opgaven">
+        <h2 id="opgaven" class="h-l">Opgaven</h2>
+        <div class="prose">{item.task.map((p) => <p>{p}</p>)}</div>
+      </section>
+
+      <section class="split block" aria-labelledby="loesningen">
+        <h2 id="loesningen" class="h-l">Løsningen</h2>
+        <div>
+          <p class="prose-intro">Vi byggede en ny hjemmeside med fokus på:</p>
+          <ul class="rule-list">{item.solution.map((s) => <li>{s}</li>)}</ul>
+        </div>
+      </section>
+
+      <section class="split block" aria-labelledby="resultatet">
+        <h2 id="resultatet" class="h-l">Resultatet</h2>
+        <div class="prose">
+          {item.result.map((p) => <p>{p}</p>)}
+          <a class="link-arrow" href={item.url} rel="noopener">Se hjemmesiden: {item.domain} <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <aside class="white" aria-labelledby="dig-h">
+    <div class="wrap section split">
+      <div class="stack">
+        <p class="eyebrow">Til dig i samme branche</p>
+        <h2 id="dig-h" class="h-l">{item.forYou.heading}</h2>
+      </div>
+      <div class="stack">
+        <p class="lead">{item.forYou.body}</p>
+        <div class="btn-row"><a class="btn btn-primary" href="/kontakt/">Kontakt os</a></div>
+      </div>
+    </div>
+  </aside>
+
+  {
+    others.length > 0 && (
+      <nav class="wrap section more" aria-label="Flere cases">
+        <p class="eyebrow">Næste case</p>
+        {others.map((o) => (
+          <a class="next" href={`/cases/${o.slug}/`}>
+            <span class="h-l">{o.client}</span>
+            <span class="muted">{o.teaser}</span>
+          </a>
+        ))}
+      </nav>
+    )
+  }
+</Base>
+
+<style>
+  .intro {
+    padding-block: clamp(32px, 5vw, 56px) clamp(40px, 6vw, 64px);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  h1 {
+    max-width: 1050px;
+  }
+  .crumbs {
+    font-size: 14px;
+    color: var(--muted);
+    display: flex;
+    gap: 8px;
+  }
+  .crumbs a {
+    color: var(--brand);
+    font-weight: 600;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px 48px;
+    border-top: 2px solid var(--brand);
+    padding-top: 20px;
+  }
+  dl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 48px;
+    margin: 0;
+  }
+  dt {
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  dd {
+    margin: 4px 0 0;
+    font-weight: 600;
+  }
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(56px, 7vw, 88px);
+  }
+  .lead-prose {
+    font-size: clamp(20px, 2vw, 24px);
+    line-height: 1.5;
+    max-width: 860px;
+  }
+  .prose {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    font-size: 18px;
+    line-height: 1.65;
+    max-width: 680px;
+  }
+  .block {
+    border-top: 1px solid var(--line);
+    padding-top: 40px;
+  }
+  .prose-intro {
+    margin-bottom: 8px;
+    color: var(--muted);
+  }
+  .rule-list li {
+    padding: 18px 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .white {
+    background: var(--surface);
+  }
+  .more {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .next {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-decoration: none;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
+  .next .h-l {
+    font-weight: 800;
+    color: var(--brand);
+  }
+  .next:hover .h-l {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 0.12em;
+  }
+</style>

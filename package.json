@@ -1,0 +1,20 @@
+{
+  "name": "do-digital",
+  "version": "1.0.0",
+  "description": "Hjemmeside for D&O Digital",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@fontsource/manrope": "^5.3.0",
+    "astro": "^7.4.5"
+  },
+  "devDependencies": {
+    "opentype.js": "^2.0.0"
+  },
+  "private": true,
+  "type": "module"
+}

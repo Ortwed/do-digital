@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+
+const topics = [
+  'Du skal have en ny hjemmeside.',
+  'Du vil flytte din hjemmeside, hosting eller e-mail.',
+  'Du er i tvivl om, hvem der ejer dit domæne og din hjemmeside.',
+  'Du har brug for hjælp til at vedligeholde og videreudvikle det, du har.',
+];
+---
+
+<Base
+  title="Kontakt D&O Digital | Hjemmeside, hosting og e-mail"
+  description="Kontakt D&O Digital og tag en uforpligtende snak om din hjemmeside, hosting og e-mail. Vi hjælper mindre virksomheder med at eje deres digitale løsninger."
+  contact={{ heading: 'Lad os tage en snak.', text: 'Skriv eller ring, så vender vi tilbage.' }}
+>
+  <PageIntro
+    eyebrow="Kontakt"
+    title="Få styr på dit digitale fundament."
+    lead="Kontakt os, så tager vi en snak om din hjemmeside, hosting og e-mail. Du forpligter dig ikke til noget."
+  />
+  <section class="wrap section-b split">
+    <h2 class="h-l">Typisk kontakter man os, når</h2>
+    <ul class="rule-list">{topics.map((t) => <li class="h-m">{t}</li>)}</ul>
+  </section>
+</Base>
+
+<style>
+  .section-b {
+    padding-bottom: var(--section-y);
+  }
+</style>

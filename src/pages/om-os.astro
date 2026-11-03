@@ -1,0 +1,130 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { site } from '../data/site';
+
+const offer = [
+  'Hjemmesider, der er bygget til den enkelte virksomhed.',
+  'Hosting, som virksomheden selv har ejerskab og kontrol over.',
+  'E-mail, der ikke unødvendigt er bundet til en hjemmesideleverandør.',
+  'Hjælp med at flytte eksisterende løsninger, når det giver mening.',
+  'Mulighed for løbende hjælp og videreudvikling, uden at være låst til os.',
+];
+---
+
+<Base
+  title="Om os: hjemmesider med eget ejerskab | D&O Digital"
+  description="D&O Digital er startet af Christian Ortwed og Jakob Daugaard. Vi bygger hjemmesider til små virksomheder, hjælper med hosting og flytning af e-mail, og du ejer det hele."
+>
+  <PageIntro
+    eyebrow="Om os"
+    title="Vi er ikke her for at få nye venner."
+    lead="Vi startede D&O Digital, fordi vi ganske enkelt synes, at noget i branchen er skævt."
+  />
+
+  <section class="white">
+    <div class="wrap section split">
+      <div class="stack">
+        <p class="eyebrow">Vores historie</p>
+        <h2 class="h-l">Du skal eje det, du betaler for.</h2>
+      </div>
+      <div class="prose">
+        <p>
+          Alt for mange mindre virksomheder betaler år efter år for deres hjemmeside, hosting og e-mail uden
+          nødvendigvis at vide, hvem der egentlig ejer hvad.
+        </p>
+        <p>
+          Nogle opdager først problemet, når de ønsker at skifte leverandør. Pludselig står de i en situation, hvor
+          hjemmesiden ikke kan flyttes, e-mailen er bundet til en bestemt løsning, eller de skal betale endnu en gang
+          for at få adgang til noget, de troede, de allerede ejede.
+        </p>
+        <p><strong>Det synes vi ikke er rimeligt.</strong></p>
+        <h3 class="h-m">Lad os være ærlige</h3>
+        <p>
+          Vi har ikke startet D&O Digital for at blive endnu et bureau, der sælger flotte hjemmesider og finder nye
+          måder at fastholde kunderne på. Vi er heller ikke interesserede i at gøre virksomheder afhængige af os.
+        </p>
+        <p>
+          Vi vil hellere bygge en hjemmeside, hjælpe med at få styr på hosting og e-mail og derefter give kunden fuld
+          frihed til selv at bestemme, hvad der skal ske fremover.
+        </p>
+        <p>
+          Hvis du vil bruge os til at opdatere din hjemmeside, gør vi det gerne. Hvis du vil bruge et andet bureau til
+          Google Ads, Meta eller SEO, skal du selvfølgelig kunne gøre det. Og hvis du en dag ikke længere har brug for
+          os, skal det heller ikke være et problem.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section split" aria-labelledby="tilbyder-h">
+    <div class="stack">
+      <p class="eyebrow">Hvad vi faktisk tilbyder</p>
+      <h2 id="tilbyder-h" class="h-l">Styr på det digitale fundament</h2>
+      <p class="muted">
+        Vi gør det tekniske overskueligt og sørger for, at du ved, hvad du ejer, og hvordan det fungerer.
+      </p>
+    </div>
+    <ul class="rule-list">
+      {offer.map((o) => <li class="h-m offer">{o}</li>)}
+    </ul>
+  </section>
+
+  <section class="blue on-dark" aria-labelledby="stiftere-h">
+    <div class="wrap section split">
+      <div class="stack">
+        <p class="eyebrow light">Stifterne</p>
+        <h2 id="stiftere-h" class="h-l">Vi bygger løsninger. Ikke afhængighed.</h2>
+      </div>
+      <div class="prose on">
+        <p>
+          D&O Digital er startet af {site.founders[0]} og {site.founders[1]}. Navnet bygger på vores initialer: D for
+          Daugaard og O for Ortwed.
+        </p>
+        <p>
+          Vi kommer med forskellige erfaringer, men deler en grundlæggende holdning: En god leverandør skal gøre sin
+          kunde stærkere, ikke mere afhængig.
+        </p>
+        <p>
+          Derfor er vores tilgang enkel. Vi bygger det ordentligt. Vi sørger for, at du ejer det. Og vi hjælper dig
+          gerne videre, når du har brug for os.
+        </p>
+        <p class="sign">{site.founders.join(' og ')}</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .white {
+    background: var(--surface);
+  }
+  .prose {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 19px;
+    line-height: 1.65;
+    max-width: 680px;
+  }
+  .prose h3 {
+    margin-top: 16px;
+  }
+  .offer {
+    font-size: 20px;
+  }
+  .blue {
+    background: var(--brand);
+    color: var(--on-dark);
+  }
+  .blue h2 {
+    color: var(--on-dark);
+  }
+  .light {
+    color: var(--accent-light);
+  }
+  .sign {
+    font-weight: 700;
+    color: var(--accent-light);
+  }
+</style>

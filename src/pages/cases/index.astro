@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import CaseList from '../../components/CaseList.astro';
+---
+
+<Base
+  title="Cases: hjemmesider til håndværkere og mindre virksomheder | D&O Digital"
+  description="Se hjemmesider, vi har bygget til håndværksvirksomheder som ORTWED Anlægs Entreprise og Rosendal Tømrer Entreprise. Professionelle hjemmesider, som kunden selv ejer."
+>
+  <PageIntro
+    eyebrow="Cases"
+    title="Hjemmesider med tryghed og ejerskab"
+    lead="Vores cases viser, hvordan vi sætter os ind i kundens branche, og hvordan hjemmesiden hjælper virksomheden med at fremstå professionelt og skabe nye henvendelser."
+  />
+  <section class="wrap cases">
+    <CaseList headingLevel="h2" />
+  </section>
+</Base>
+
+<style>
+  .cases {
+    padding-bottom: var(--section-y);
+  }
+</style>

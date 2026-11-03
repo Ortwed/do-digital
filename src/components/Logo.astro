@@ -1,0 +1,36 @@
+---
+import { AMP_PATH } from '../data/logo';
+
+interface Props {
+  variant?: 'default' | 'negative';
+  size?: number; // højde på monogrammet i px
+}
+const { variant = 'default', size = 38 } = Astro.props;
+const stroke = variant === 'negative' ? 'var(--on-dark)' : 'var(--brand)';
+const amp = variant === 'negative' ? 'var(--accent-light)' : 'var(--accent)';
+const width = Math.round((size * 325) / 120);
+---
+
+<span class="logo" style={`--logo-h:${size}px;--logo-c:${stroke}`}>
+  <svg width={width} height={size} viewBox="0 0 325 120" aria-hidden="true" focusable="false">
+    <path d="M16 10H50A50 50 0 0 1 50 110H16Z" fill="none" stroke={stroke} stroke-width="14"></path>
+    <path d={AMP_PATH} fill={amp}></path>
+    <circle cx="259" cy="60" r="50" fill="none" stroke={stroke} stroke-width="14"></circle>
+  </svg>
+  <span class="word">Digital</span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--logo-h) * 0.27);
+  }
+  .word {
+    font-weight: 500;
+    font-size: calc(var(--logo-h) * 0.71);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--logo-c);
+  }
+</style>

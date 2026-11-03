@@ -1,0 +1,230 @@
+---
+import Base from '../layouts/Base.astro';
+import CaseList from '../components/CaseList.astro';
+import { services, ownership, site } from '../data/site';
+
+const pillars = [
+  { title: 'Hjemmeside', body: 'Bygget til den enkelte virksomhed.' },
+  { title: 'Hosting', body: 'Med ejerskab og kontrol hos dig.' },
+  { title: 'E-mail', body: 'Uden unødvendig binding til en leverandør.' },
+];
+---
+
+<Base
+  title="Hjemmesider til mindre virksomheder, uden binding | D&O Digital"
+  description="Vi bygger professionelle hjemmesider til mindre virksomheder, der vil eje deres digitale løsninger selv. Hjemmeside, hosting og e-mail med eget ejerskab og uden binding."
+>
+  <section class="wrap hero">
+    <p class="eyebrow eyebrow-muted">Hjemmesider til mindre virksomheder</p>
+    <h1 class="h-display">Du skal <span class="underline-accent">eje</span> det, du betaler for.</h1>
+    <ol class="pillars">
+      {
+        pillars.map((p, i) => (
+          <li>
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="h-m">{p.title}</span>
+            <span class="muted">{p.body}</span>
+          </li>
+        ))
+      }
+    </ol>
+    <div class="hero-foot">
+      <p class="lead">
+        Vi bygger hjemmesider til mindre virksomheder, der vil eje deres digitale løsninger selv, uden unødvendige
+        bindinger og leverandørafhængighed.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/kontakt/">Kontakt os</a>
+        <a class="btn btn-secondary" href="/cases/">Se cases</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="white" aria-labelledby="ydelser-h">
+    <div class="wrap section split">
+      <div class="stack sticky">
+        <p class="eyebrow">Ydelser</p>
+        <h2 id="ydelser-h" class="h-l">Vi bygger løsninger. Ikke afhængighed.</h2>
+        <p class="muted">
+          Vi hjælper med hjemmeside, hosting og e-mail, så du får et digitalt fundament, du selv ejer og frit kan vælge
+          at videreudvikle.
+        </p>
+        <a class="link-arrow" href="/ydelser/">Se alle ydelser <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="rule-list">
+        {
+          services.map((s) => (
+            <li>
+              <h3 class="h-m">{s.title}</h3>
+              <p class="muted">{s.short}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-labelledby="ejer-h">
+    <div class="split">
+      <div class="stack">
+        <p class="eyebrow">Ejerskab</p>
+        <h2 id="ejer-h" class="h-l">Ved du, hvem der ejer hvad?</h2>
+        <p class="lead">
+          Mange opdager først problemet, når de vil skifte leverandør. Hos D&O Digital mener vi, at din hjemmeside,
+          dit domæne og din e-mail skal være dine. Derfor bygger vi løsninger, hvor du selv har ejerskab og kontrol.
+        </p>
+      </div>
+      <ul class="owns">
+        {
+          ownership.map((o) => (
+            <li>
+              <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+                <circle cx="14" cy="14" r="12" fill="none" stroke="currentColor" stroke-width="3" />
+                <path d="M8.5 14.5l3.5 3.5 7.5-8" fill="none" stroke="var(--accent)" stroke-width="3" />
+              </svg>
+              <div>
+                <h3 class="h-m">{o.title}</h3>
+                <p class="muted">{o.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="blue on-dark" aria-labelledby="om-h">
+    <div class="wrap section about">
+      <h2 id="om-h" class="h-xl">Vi er ikke her for at få nye venner.</h2>
+      <div class="columns">
+        <p>
+          Alt for mange mindre virksomheder betaler år efter år for deres hjemmeside, hosting og e-mail uden
+          nødvendigvis at vide, hvem der egentlig ejer hvad.
+        </p>
+        <p>
+          Vi har ikke startet D&O Digital for at blive endnu et bureau, der finder nye måder at fastholde kunderne på.
+          Vi vil hellere bygge en hjemmeside, hjælpe med at få styr på hosting og e-mail og derefter give kunden fuld
+          frihed til selv at bestemme, hvad der skal ske fremover.
+        </p>
+        <p>
+          Hvis du vil bruge os til at opdatere din hjemmeside, gør vi det gerne. Hvis du vil bruge et andet bureau til
+          Google Ads, Meta eller SEO, skal du selvfølgelig kunne gøre det. Og hvis du en dag ikke længere har brug for
+          os, skal det heller ikke være et problem.
+        </p>
+        <p class="sign">{site.founders.join(' og ')}, stiftere</p>
+      </div>
+      <a class="link-arrow on-blue" href="/om-os/">Læs vores historie <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-labelledby="cases-h">
+    <div class="stack cases-head">
+      <p class="eyebrow">Cases</p>
+      <h2 id="cases-h" class="h-l">Hjemmesider med tryghed og ejerskab</h2>
+    </div>
+    <CaseList />
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-block: clamp(48px, 7vw, 72px) clamp(72px, 9vw, 104px);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .eyebrow-muted {
+    color: var(--muted);
+    letter-spacing: 0.16em;
+  }
+  .pillars {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 32px;
+  }
+  .pillars li {
+    border-top: 2px solid var(--brand);
+    padding-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .num {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .hero-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px 48px;
+    margin-top: 24px;
+  }
+  .white {
+    background: var(--surface);
+  }
+  @media (min-width: 900px) {
+    .sticky {
+      position: sticky;
+      top: 32px;
+    }
+  }
+  .owns {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: 32px;
+  }
+  .owns li {
+    display: flex;
+    gap: 16px;
+    color: var(--brand);
+  }
+  .owns h3 {
+    margin-bottom: 4px;
+  }
+  .blue {
+    background: var(--brand);
+    color: var(--on-dark);
+  }
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .about h2 {
+    color: var(--on-dark);
+    max-width: 900px;
+  }
+  .columns {
+    column-width: 340px;
+    column-gap: 56px;
+    font-size: 19px;
+    line-height: 1.65;
+  }
+  .columns p {
+    margin: 0 0 22px;
+    break-inside: avoid;
+  }
+  .sign {
+    font-weight: 700;
+    color: var(--accent-light);
+  }
+  .on-blue {
+    color: var(--on-dark);
+    margin-top: -24px;
+  }
+  .on-blue:hover {
+    color: var(--accent-light);
+  }
+  .cases-head {
+    margin-bottom: 40px;
+  }
+</style>
