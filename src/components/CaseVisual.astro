@@ -3,9 +3,10 @@ import type { Case } from '../data/cases';
 import { link } from '../data/paths';
 interface Props {
   item: Case;
+  /** Ubrugt, beholdt for bagudkompatibilitet. */
   height?: number;
 }
-const { item, height = 340 } = Astro.props;
+const { item } = Astro.props;
 ---
 
 <figure class="visual">
@@ -15,9 +16,9 @@ const { item, height = 340 } = Astro.props;
   </div>
   {
     item.image ? (
-      <img src={link(item.image)} alt={`Forsiden af ${item.domain}`} loading="lazy" width="1600" height="1000" />
+      <img src={link(item.image)} alt={`Forsiden af ${item.domain}`} loading="lazy" width="1305" height="816" />
     ) : (
-      <div class="placeholder" style={`min-height:${height}px`}>
+      <div class="placeholder">
         [Screenshot af {item.domain}]
       </div>
     )
@@ -64,6 +65,7 @@ const { item, height = 340 } = Astro.props;
     object-position: top;
   }
   .placeholder {
+    aspect-ratio: 16 / 10;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,10 +73,5 @@ const { item, height = 340 } = Astro.props;
     text-align: center;
     font-size: 15px;
     color: var(--muted);
-  }
-  @media (max-width: 640px) {
-    .placeholder {
-      min-height: 200px !important;
-    }
   }
 </style>

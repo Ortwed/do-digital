@@ -67,7 +67,7 @@ export const cases: Case[] = [
     client: 'Rosendal Tømrer Entreprise',
     url: 'https://rosendal-tomrer.dk',
     domain: 'rosendal-tomrer.dk',
-    image: null,
+    image: '/cases/rosendal-tomrer.webp',
     headline: 'En hjemmeside, der afspejler håndværket og menneskene bag',
     teaser: 'En hjemmeside, der afspejler håndværket og menneskene bag.',
     industry: 'Tømrerarbejde',
