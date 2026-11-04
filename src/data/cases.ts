@@ -49,7 +49,7 @@ export const cases: Case[] = [
     ],
     challenge: {
       paragraphs: [
-        'ORTWED Anlægs Entreprise er en anlægsgartner og brolægger i Hundested. Virksomheden havde en hjemmeside og en aftale om synlighed på Google, der havde kørt i omkring 3,5 år.',
+        'ORTWED Anlægs Entreprise er Nicolais anlægsgartner- og brolæggerfirma i Hundested. Virksomheden havde en hjemmeside og en aftale om synlighed på Google, der havde kørt i omkring 3,5 år.',
         'Men virksomheden havde ingen adgang til sine egne søgedata fra Google og kunne derfor ikke selv se, hvad aftalen gav. Hjemmesiden var synlig på to søgeord.',
         'Målet var en hjemmeside, der er bygget til at blive fundet, og hvor virksomheden selv kan se, hvad den giver.',
       ],
@@ -126,7 +126,7 @@ export const cases: Case[] = [
         'Rosendal Tømrer Entreprise ApS i Hundested havde allerede en hjemmeside. Men den var ejet af det bureau, der havde lavet den, og det samme gjaldt designet og annoncekontoen. Aftalen fornyede sig automatisk.',
         'Under overfladen var der også problemer, som en besøgende ikke ser, men som Google gør: Siderne manglede overskrifter, fejlsiderne var sat forkert op, Google fik ingen hjælp til at forstå, hvad virksomheden laver, og hjemmesiden var blevet ramt af skadelig kode.',
         'Den slags aftaler fungerer, så længe alt kører. Udfordringen kommer den dag, man vil noget andet. Så ejer man ikke selv det, man har betalt for, og et skifte betyder i praksis, at man starter forfra.',
-        'Målet var derfor en løsning, hvor alt står i virksomhedens eget navn, og hvor indehaveren selv bestemmer, hvem der skal hjælpe fremover.',
+        'Målet var derfor en løsning, hvor alt står i virksomhedens eget navn, og hvor Sebastian selv bestemmer, hvem der skal hjælpe fremover.',
       ],
       before: {
         heading: 'Før',
@@ -142,7 +142,7 @@ export const cases: Case[] = [
         items: [
           'En ny hjemmeside, bygget fra bunden',
           'Domænet og mailen flyttet over, inklusive en postkasse på 11,2 GB',
-          'Besøgstal og søgedata fra Google i ejerens eget navn',
+          'Besøgstal og søgedata fra Google i Sebastians eget navn',
           'Google-profilen overtaget',
           'Aftalen med bureauet opsagt',
         ],
@@ -162,7 +162,7 @@ export const cases: Case[] = [
     result: [
       'Rosendal Tømrer Entreprise har fået en hjemmeside, der præsenterer virksomheden på en måde, som stemmer overens med dens arbejde og værdier.',
       'En løsning, der både kan bruges til at skabe nye kunderelationer og videreudvikles i takt med virksomhedens behov.',
-      'Indehaveren ejer nu alt selv og er ikke længere afhængig af bureauet. Rosendal er vores første kunde og beviset på, at processen virker.',
+      'Sebastian ejer nu alt selv og er ikke længere afhængig af bureauet. Rosendal er vores første kunde og beviset på, at processen virker.',
     ],
     forYou: {
       heading: 'Mangler din tømrervirksomhed en ny hjemmeside?',
@@ -172,9 +172,8 @@ export const cases: Case[] = [
   {
     slug: 'ml-polering',
     client: 'ML Polering',
-    // TODO: domænet mangler. Når det er kendt, vises links til sitet automatisk.
-    url: null,
-    domain: null,
+    url: 'https://www.mlpolering.dk/',
+    domain: 'mlpolering.dk',
     image: '/cases/ml-polering.webp',
     headline: 'Fra ingen hjemmeside til en fast pris på 30 sekunder',
     teaser: 'En hjemmeside med online prisberegner, der også er et salgsværktøj.',
@@ -190,7 +189,7 @@ export const cases: Case[] = [
     ],
     challenge: {
       paragraphs: [
-        'ML Polering havde ingen hjemmeside.',
+        'Morten Lindblad, der driver ML Polering, havde ingen hjemmeside.',
         'For en enmandsvirksomhed skal en hjemmeside ikke kun være et visitkort. Den skal også hjælpe med at sælge.',
       ],
     },
@@ -201,7 +200,7 @@ export const cases: Case[] = [
     solution: [
       'Fire sider: forside, priser, spørgsmål og svar og områder.',
       'En online prisberegner, hvor kunden vælger vinduer, adgang og interval og ser prisen med det samme.',
-      'En forespørgselsformular, der sender kundens prisberegning med.',
+      'En forespørgselsformular, der sender kundens prisberegning med til Morten.',
       'Kundeanmeldelser og før/efter-billeder på forsiden.',
       'Opsætning, så Google kan forstå, hvad virksomheden tilbyder, og hvilke områder den dækker.',
     ],
