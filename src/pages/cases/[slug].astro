@@ -26,9 +26,9 @@ const schema = [
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
     name: `Ny hjemmeside til ${item.client}`,
-    url: item.url,
+    ...(item.url && { url: item.url }),
     creator: { '@id': abs('/#organization') },
-    about: { '@type': 'Organization', name: item.client, url: item.url },
+    about: { '@type': 'Organization', name: item.client, ...(item.url && { url: item.url }) },
   },
 ];
 ---
@@ -47,7 +47,7 @@ const schema = [
           <div><dt>Branche</dt><dd>{item.industry}</dd></div>
           <div><dt>Leveret</dt><dd>Hjemmeside og digitalt ejerskab</dd></div>
         </dl>
-        <a class="btn btn-light" href={item.url} rel="noopener">Se {item.domain} <span aria-hidden="true">&nbsp;↗</span></a>
+        {item.url && <a class="btn btn-light" href={item.url} rel="noopener">Se {item.domain} <span aria-hidden="true">&nbsp;↗</span></a>}
       </div>
     </div></header>
 
@@ -66,16 +66,22 @@ const schema = [
             <h2 id="udgangspunktet" class="h-l">Udgangspunktet</h2>
             <div class="challenge">
               <div class="prose">{item.challenge.paragraphs.map((p) => <p>{p}</p>)}</div>
-              <div class="compare">
-                <div class="col before">
-                  <h3 class="col-h">{item.challenge.before.heading}</h3>
-                  <ul>{item.challenge.before.items.map((t) => <li>{t}</li>)}</ul>
+              {(item.challenge.before || item.challenge.after) && (
+                <div class="compare">
+                  {item.challenge.before && (
+                    <div class="col before">
+                      <h3 class="col-h">{item.challenge.before.heading}</h3>
+                      <ul>{item.challenge.before.items.map((t) => <li>{t}</li>)}</ul>
+                    </div>
+                  )}
+                  {item.challenge.after && (
+                    <div class="col after">
+                      <h3 class="col-h">{item.challenge.after.heading}</h3>
+                      <ul>{item.challenge.after.items.map((t) => <li>{t}</li>)}</ul>
+                    </div>
+                  )}
                 </div>
-                <div class="col after">
-                  <h3 class="col-h">{item.challenge.after.heading}</h3>
-                  <ul>{item.challenge.after.items.map((t) => <li>{t}</li>)}</ul>
-                </div>
-              </div>
+              )}
             </div>
           </section>
         )
@@ -89,7 +95,7 @@ const schema = [
       <section class="split block" aria-labelledby="loesningen">
         <h2 id="loesningen" class="h-l">Løsningen</h2>
         <div>
-          <p class="prose-intro">Vi byggede en ny hjemmeside med fokus på:</p>
+          <p class="prose-intro">{item.solutionIntro ?? 'Vi byggede en ny hjemmeside med fokus på:'}</p>
           <ul class="rule-list">{item.solution.map((s) => <li>{s}</li>)}</ul>
         </div>
       </section>
@@ -98,9 +104,29 @@ const schema = [
         <h2 id="resultatet" class="h-l">Resultatet</h2>
         <div class="prose">
           {item.result.map((p) => <p>{p}</p>)}
-          <a class="link-arrow" href={item.url} rel="noopener">Se hjemmesiden: {item.domain} <span aria-hidden="true">↗</span></a>
+          {item.url && <a class="link-arrow" href={item.url} rel="noopener">Se hjemmesiden: {item.domain} <span aria-hidden="true">↗</span></a>}
         </div>
       </section>
+
+      {
+        item.learnings && (
+          <section class="split block" aria-labelledby="laering">
+            <h2 id="laering" class="h-l">{item.learnings.heading}</h2>
+            <div class="prose">
+              {item.learnings.intro && <p>{item.learnings.intro}</p>}
+              <dl class="figures">
+                {item.learnings.figures.map((f) => (
+                  <div>
+                    <dt>{f.value}</dt>
+                    <dd>{f.label}</dd>
+                  </div>
+                ))}
+              </dl>
+              {item.learnings.outro && <p class="outro">{item.learnings.outro}</p>}
+            </div>
+          </section>
+        )
+      }
     </div>
   </article>
 
@@ -266,6 +292,42 @@ const schema = [
   }
   .after li::before {
     content: '✓';
+    color: var(--brand);
+  }
+  .figures {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 16px;
+    margin: 8px 0;
+  }
+  .figures > div {
+    background: var(--surface);
+    border-radius: var(--radius-card);
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .figures dt {
+    font-weight: 800;
+    font-size: clamp(36px, 4vw, 48px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--brand);
+    text-transform: none;
+    letter-spacing: -0.03em;
+  }
+  .figures dd {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .outro {
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.3;
     color: var(--brand);
   }
   .prose-intro {

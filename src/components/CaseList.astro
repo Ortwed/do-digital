@@ -24,10 +24,12 @@ const H = headingLevel;
               Læs casen <span class="sr-only">om {c.client}</span>
               <span aria-hidden="true">→</span>
             </a>
-            <a class="link-arrow" href={c.url} rel="noopener">
-              Se hjemmesiden <span class="sr-only">{c.domain}</span>
-              <span aria-hidden="true">↗</span>
-            </a>
+            {c.url && (
+              <a class="link-arrow" href={c.url} rel="noopener">
+                Se hjemmesiden <span class="sr-only">{c.domain}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            )}
           </div>
         </div>
       </li>

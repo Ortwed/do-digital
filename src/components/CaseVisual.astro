@@ -12,14 +12,14 @@ const { item } = Astro.props;
 <figure class="visual">
   <div class="chrome" aria-hidden="true">
     <span></span><span></span><span></span>
-    <div class="address">{item.domain}</div>
+    <div class="address">{item.domain ?? item.client}</div>
   </div>
   {
     item.image ? (
-      <img src={link(item.image)} alt={`Forsiden af ${item.domain}`} loading="lazy" width="1305" height="816" />
+      <img src={link(item.image)} alt={`Forsiden af ${item.domain ?? item.client}s hjemmeside`} loading="lazy" width="1305" height="816" />
     ) : (
       <div class="placeholder">
-        [Screenshot af {item.domain}]
+        [Screenshot af {item.domain ?? item.client}]
       </div>
     )
   }
