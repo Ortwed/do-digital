@@ -60,6 +60,27 @@ const schema = [
         {item.intro.map((p) => <p>{p}</p>)}
       </div>
 
+      {
+        item.challenge && (
+          <section class="split block" aria-labelledby="udgangspunktet">
+            <h2 id="udgangspunktet" class="h-l">Udgangspunktet</h2>
+            <div class="challenge">
+              <div class="prose">{item.challenge.paragraphs.map((p) => <p>{p}</p>)}</div>
+              <div class="compare">
+                <div class="col before">
+                  <h3 class="col-h">{item.challenge.before.heading}</h3>
+                  <ul>{item.challenge.before.items.map((t) => <li>{t}</li>)}</ul>
+                </div>
+                <div class="col after">
+                  <h3 class="col-h">{item.challenge.after.heading}</h3>
+                  <ul>{item.challenge.after.items.map((t) => <li>{t}</li>)}</ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        )
+      }
+
       <section class="split block" aria-labelledby="opgaven">
         <h2 id="opgaven" class="h-l">Opgaven</h2>
         <div class="prose">{item.task.map((p) => <p>{p}</p>)}</div>
@@ -187,6 +208,65 @@ const schema = [
   .block {
     border-top: 1px solid var(--line);
     padding-top: 40px;
+  }
+  .challenge {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .compare {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 16px;
+  }
+  .col {
+    border-radius: var(--radius-card);
+    padding: 24px 28px;
+  }
+  .before {
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .after {
+    background: var(--tint);
+  }
+  .col-h {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .col li {
+    padding-left: 22px;
+    position: relative;
+  }
+  .before li::before,
+  .after li::before {
+    position: absolute;
+    left: 0;
+    font-weight: 800;
+  }
+  .before li::before {
+    content: '–';
+    color: var(--muted);
+  }
+  .after li::before {
+    content: '✓';
+    color: var(--brand);
   }
   .prose-intro {
     margin-bottom: 8px;

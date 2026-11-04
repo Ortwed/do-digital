@@ -10,6 +10,12 @@ export interface Case {
   industry: string;
   seo: { title: string; description: string };
   intro: string[];
+  /** Valgfrit: kundens udgangspunkt med en før/nu-sammenligning. */
+  challenge?: {
+    paragraphs: string[];
+    before: { heading: string; items: string[] };
+    after: { heading: string; items: string[] };
+  };
   task: string[];
   solution: string[];
   result: string[];
@@ -74,6 +80,26 @@ export const cases: Case[] = [
       'Rosendal Tømrer Entreprise er en tømrervirksomhed med fokus på ordentligt håndværk, personlig kontakt og løsninger, der holder.',
       'Hjemmesiden skulle give potentielle kunder et indblik i virksomheden, dens arbejde og de mennesker, der står bag.',
     ],
+    challenge: {
+      paragraphs: [
+        'Rosendal Tømrer Entreprise ApS i Hundested havde allerede en hjemmeside. Men den var ejet af det bureau, der havde lavet den, og det samme gjaldt designet og annoncekontoen.',
+        'Det er en helt almindelig måde at lave en aftale på, og den fungerer, så længe alt kører. Udfordringen kommer den dag, man vil noget andet. Så ejer man ikke selv det, man har betalt for, og et skifte betyder i praksis, at man starter forfra.',
+        'Målet var derfor en løsning, hvor alt står i virksomhedens eget navn, og hvor indehaveren selv bestemmer, hvem der skal hjælpe fremover.',
+      ],
+      before: {
+        heading: 'Før: lå hos bureauet',
+        items: ['Hjemmesiden', 'Designet', 'Annoncekontoen'],
+      },
+      after: {
+        heading: 'Nu: i virksomhedens eget navn',
+        items: [
+          'En ny hjemmeside, bygget fra bunden',
+          'Domænet, flyttet over',
+          'Mailen, inklusive en postkasse på 11,2 GB',
+          'Google-profilen, overtaget',
+        ],
+      },
+    },
     task: [
       'Målet var at skabe en hjemmeside, hvor Rosendal Tømrer Entreprise kunne præsentere sine kompetencer og projekter på en overskuelig og troværdig måde.',
       'Det skulle være nemt for kunderne at forstå, hvad virksomheden tilbyder, og hvorfor de trygt kan vælge Rosendal til deres næste byggeprojekt.',
@@ -88,6 +114,7 @@ export const cases: Case[] = [
     result: [
       'Rosendal Tømrer Entreprise har fået en hjemmeside, der præsenterer virksomheden på en måde, som stemmer overens med dens arbejde og værdier.',
       'En løsning, der både kan bruges til at skabe nye kunderelationer og videreudvikles i takt med virksomhedens behov.',
+      'Indehaveren ejer nu alt selv og er ikke længere afhængig af bureauet. Rosendal er vores første kunde og beviset på, at processen virker.',
     ],
     forYou: {
       heading: 'Mangler din tømrervirksomhed en ny hjemmeside?',
